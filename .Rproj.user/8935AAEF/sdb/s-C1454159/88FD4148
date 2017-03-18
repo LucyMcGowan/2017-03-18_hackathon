@@ -1,14 +1,14 @@
 {
     "collab_server" : "",
-    "contents" : "library('dplyr')\nlibrary('jsonlite')\nhttr::GET(\"http://data.nashville.gov/resource/geur-py3i.json\") %>%\n  httr::content(\"parsed\") %>%\n  purrr::map_df(as.data.frame) -> dat_df\n\n\ndat_df %>%\n  group_by(park_name) %>% \n  summarise_each(funs(list)) %>% \n  toJSON(pretty=TRUE) -> dat_json\n\ndat_json <- gsub('\\\\[\\\\\"', '\\\\\"',dat_json)\ndat_json <- gsub('\\\\\"\\\\]', '\\\\\"',dat_json)\ndat_json <- gsub('\\\\[false\\\\]',\"false\",dat_json)\ndat_json <- gsub('\\\\[null\\\\]',\"null\",dat_json)\ndat_json <- gsub('\\\\[true\\\\]',\"true\",dat_json)\ndat_json <- gsub('\\\\.latitude',\"_latitude\",dat_json)\ndat_json <- gsub('\\\\.longitude',\"_longitude\",dat_json)\ndat_json <- gsub('\\\\.needs_recording',\"_needs_recording\",dat_json)\ndat_json <- gsub('\\\\.human_address',\"_human_address\",dat_json)\n\nwrite(dat_json,file = \"park_dat_json.txt\")\nwrite.csv(dat_df, file = \"park_dat.csv\")",
+    "contents" : "library('dplyr')\nlibrary('jsonlite')\nhttr::GET(\"http://data.nashville.gov/resource/geur-py3i.json\") %>%\n  httr::content(\"parsed\") %>%\n  purrr::map_df(as.data.frame) -> dat_df\n\n\ndat_df %>%\n  group_by(park_name) %>% \n  summarise_each(funs(list)) %>% \n  toJSON(pretty=TRUE) -> dat_json\n\ndat_json <- gsub('\\\\[\\\\\"', '\\\\\"',dat_json)\ndat_json <- gsub('\\\\\"\\\\]', '\\\\\"',dat_json)\ndat_json <- gsub('\\\\[false\\\\]',\"false\",dat_json)\ndat_json <- gsub('\\\\[null\\\\]',\"null\",dat_json)\ndat_json <- gsub('\\\\[true\\\\]',\"true\",dat_json)\ndat_json <- gsub('\\\\.latitude',\"_latitude\",dat_json)\ndat_json <- gsub('\\\\.longitude',\"_longitude\",dat_json)\ndat_json <- gsub('\\\\.needs_recoding',\"_needs_recoding\",dat_json)\ndat_json <- gsub('\\\\.human_address',\"_human_address\",dat_json)\ndat_json <- gsub(',\n    \"mapped_location_latitude\": null,',\"\",dat_json)\ndat_json <- gsub('\"mapped_location_longitude\": null',\"\",dat_json)\n\nwrite(dat_json,file = \"park_dat_json.txt\")\nwrite.csv(dat_df, file = \"park_dat.csv\")",
     "created" : 1489858340398.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1669394143",
+    "hash" : "2544037941",
     "id" : "88FD4148",
-    "lastKnownWriteTime" : 1489865470,
-    "last_content_update" : 1489865470255,
+    "lastKnownWriteTime" : 1489866127,
+    "last_content_update" : 1489866127106,
     "path" : "~/Documents/wonderland/hackathon/code.R",
     "project_path" : "code.R",
     "properties" : {
