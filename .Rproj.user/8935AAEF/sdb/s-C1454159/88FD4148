@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library('dplyr')\nlibrary('jsonlite')\nhttr::GET(\"http://data.nashville.gov/resource/geur-py3i.json\") %>%\n  httr::content(\"parsed\") %>%\n  purrr::map_df(as.data.frame) -> dat_df\n\n\ndat_df %>%\n  group_by(park_name) %>% \n  summarise_each(funs(list)) %>% \n  toJSON(pretty=TRUE) -> dat_json\n\ndat_json <- gsub('\\\\[\\\\\"', '\\\\\"',dat_json)\ndat_json <- gsub('\\\\\"\\\\]', '\\\\\"',dat_json)\ndat_json <- gsub('\\\\[false\\\\]',\"false\",dat_json)\ndat_json <- gsub('\\\\[null\\\\]',\"null\",dat_json)\ndat_json <- gsub('\\\\[true\\\\]',\"true\",dat_json)\n\nwrite(dat_json,file = \"park_dat_json.txt\")\nwrite.csv(dat_df, file = \"park_dat.csv\")",
+    "created" : 1489858340398.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3065371394",
+    "id" : "88FD4148",
+    "lastKnownWriteTime" : 1489863896,
+    "last_content_update" : 1489864498802,
+    "path" : "~/Documents/wonderland/hackathon/code.R",
+    "project_path" : "code.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
